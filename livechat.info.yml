@@ -1,0 +1,9 @@
+name: Livechat Chat
+type: module
+description: Adds Livechat javascript tracking code to all your site's pages.
+package: Utility
+configure: livechat.settings
+version: '8.x'
+core: '8.x'
+project: 'livechat'
+

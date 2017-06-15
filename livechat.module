@@ -1,0 +1,42 @@
+<?php
+
+use Drupal\Component\Utility\Unicode;
+use Drupal\Core\Path\PathMatcher;
+use Drupal\Core\Url;
+
+function livechat_page_attachments(array &$page) {
+ 
+  $config = \Drupal::config('livechat.settings');
+  
+  
+  if (empty($config->get('licence_number'))) {
+    return;
+  }
+  
+  if (!_livechat_active()) {
+    return;
+  }
+ 
+  $js_settings = [
+    'licence_number' => $config->get('licence_number'),
+  ];
+
+  $page['#attached']['drupalSettings']['livechat'] = $js_settings;
+
+  $page['#attached']['library'][] = 'livechat/livechat';
+
+}
+
+function _livechat_active() {
+ 
+  $page_match = true;
+  
+  $path = \Drupal::service('path.current')->getPath();
+
+	if(strpos($path,"admin")){
+	  $page_match = false; 
+	}
+
+  return $page_match;
+}
+

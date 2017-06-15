@@ -1,0 +1,7 @@
+livechat.settings:
+  type: config_object
+  label: 'LiveChat settings'
+  mapping:
+    licence_number:
+      type: string
+      label: 'LiveChat account number'

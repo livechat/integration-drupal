@@ -1,0 +1,6 @@
+livechat:
+  version: VERSION
+  js:
+    js/livechat.js: { scope: footer }
+  dependencies:
+    - core/drupalSettings

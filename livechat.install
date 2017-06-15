@@ -1,0 +1,19 @@
+<?php
+
+function livechat_requirements($phase) {
+  $requirements = [];
+
+  if ($phase == 'runtime') {
+    
+    if (!(\Drupal::config('livechat.settings')->get('licence_number', FALSE))) {
+      $requirements['livechat'] = [
+        'title' => t('LiveChat module'),
+        'description' => t('LiveChat module has not been configured yet. Please configure its settings from the <a href=":url">LiveChat settings page</a>.', [':url' => \Drupal::url('livechat.settings')]),
+        'severity' => REQUIREMENT_ERROR,
+        'value' => t('Not configured'),
+      ];
+    }
+  }
+
+  return $requirements;
+}

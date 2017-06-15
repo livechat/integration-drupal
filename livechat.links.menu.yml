@@ -1,0 +1,5 @@
+livechat.settings:
+ title: 'Livechat Chat'
+ description: 'Configure the settings for Livechat Chat.'
+ parent: system.admin_config_services
+ route_name: livechat.settings

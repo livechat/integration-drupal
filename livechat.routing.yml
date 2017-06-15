@@ -1,0 +1,7 @@
+livechat.settings:
+  path: 'admin/config/services/livechat'
+  defaults:
+    _form: '\Drupal\livechat\Form\SettingsForm'
+    _title: 'LiveChat Chat'
+  requirements:
+    _permission: 'administer LiveChat'
