@@ -82,11 +82,26 @@ class SettingsForm extends ConfigFormBase {
 			'#type' => 'textfield',
 			'#title' => t('Email'),
 			'#default_value' => "john@public.com",
+			'#size' => 60,
+			'#maxlength' => 60,
+			'#required' => TRUE,
+			'#states' => array(
+			
+				'visible' => array(
+					 ':input[name="settings"]' => array('value' => '0'),
+				),
+			)
+		];
+	
+	$form['password'] = [
+			'#type' => 'textfield',
+				'#title' => t('password'),
+			'#default_value' => "********",
 			'#size' => 30,
 			'#maxlength' => 30,
 			'#required' => TRUE,
 			'#states' => array(
-			
+
 				'visible' => array(
 					 ':input[name="settings"]' => array('value' => '0'),
 				),
@@ -132,7 +147,71 @@ class SettingsForm extends ConfigFormBase {
   
   public function validateForm(array &$form, FormStateInterface $form_state)
 	{	
-		if (valid_email_address($form_state->getValue('livechat_login')))
+	  if($form['settings']['#value'] == 1){
+		  $this->getLicense($form, $form_state);
+	  }else {
+		  $this->createLicence($form, $form_state);
+	  }
+	  
+	  parent::validateForm($form, $form_state);
+    }
+  
+  private function createLicence(array &$form, FormStateInterface $form_state) {
+	  if (valid_email_address($form_state->getValue('livechat_login')))
+		{
+			$client = new \GuzzleHttp\Client();
+			try
+			{
+				$base = "https://www.livechatinc.com/signup/?";
+				$url = "";
+				//name
+				$url .= "name=".urlencode(htmlspecialchars($form['name']['#value'].$form['lastname']['#value']));
+				
+				//email
+				$url .= "&email=".urlencode(htmlspecialchars($form['email']['#value']));
+				//password
+				$url .= "&password=".urlencode(htmlspecialchars($form['password']['#value']));
+				//website
+				$url .= "&website=".urlencode(htmlspecialchars($form['website']['#value']));
+				//timezone
+				$url .= "&timezone_gmt=". drupal_get_user_timezone();
+				//url += '	&action=drupal_signup';
+				$url .= "&action=drupal_signup";
+				//url += '&jsoncallback=?';
+				$url .= "&jsoncallback=?";
+				
+				$res = $client->get($base.$url);
+				
+				
+				$stream = (string) $res->getBody();
+				$stream = str_replace(array( '(', ')' ), '', $stream);
+			
+				if(isset(json_decode($stream)->error)){
+					$form['livechat_login']['#value'] = "please enter valid livechat login";
+
+					$form_state->setErrorByName("livechat_login","it is not vaild email");
+					
+				} else {
+					
+					$form_state->setValue('licence_number', json_decode($stream)->response);
+				}
+				
+				
+				
+			} catch (RequestException $e)
+			{
+				return($this->t('Error'));
+			}
+
+		} else {
+			
+			$form['livechat_login']['#value'] = "example@example.com";
+			
+		    $form_state->setErrorByName("livechat_login","this email is invalid");
+		}
+  }
+  private function getLicense(array &$form, FormStateInterface $form_state) {
+	  if (valid_email_address($form_state->getValue('livechat_login')))
 		{
 			$client = new \GuzzleHttp\Client();
 			try
@@ -165,8 +244,6 @@ class SettingsForm extends ConfigFormBase {
 			
 		    $form_state->setErrorByName("livechat_login","this email is invalid");
 		}
-
-		parent::validateForm($form, $form_state);
   }
 
 }
