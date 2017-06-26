@@ -18,25 +18,18 @@ class SettingsForm extends ConfigFormBase {
     return ['livechat.settings'];
   }
 
-  public function buildForm(array $form, FormStateInterface $form_state) {
-    $config = $this->config('livechat.settings');
+  public function buildForm(array $form, FormStateInterface $form_state)
+	{
+		$config = $this->config('livechat.settings');
 
-    $form['livechat_login'] = [
-			'#type' => 'textfield',
-			'#title' => t('LiveChat login:'),
-			'#default_value' => $config->get('livechat_login'),
-			'#size' => 30,
-			'#maxlength' => 30,
-			'#required' => TRUE,
-			'#states' => array(
-				
-				'visible' => array(
-					 ':input[name="settings"]' => array('value' => '1'),
-				),
-			)
-		];
-	
-	$form['licence_number'] = [
+		$form['settings'] = array(
+			'#type' => 'radios',
+			'#title' => $this->t('Do you have LiveChat account?'),
+			'#default_value' => 1,
+			'#options' => array(0 => $this->t('Nah'), 1 => $this->t('Yes I Do')),
+		);
+
+		$form['licence_number'] = [
 			'#type' => 'hidden',
 			'#title' => t('LiveChat licence number:'),
 			'#default_value' => $config->get('licence_number'),
@@ -47,94 +40,69 @@ class SettingsForm extends ConfigFormBase {
 				'visible' => FALSE
 			)
 		];
-	
-	$form['name'] = [
-			'#type' => 'textfield',
-			'#title' => t('Name'),
-			'#default_value' => "John",
-			'#size' => 30,
-			'#maxlength' => 30,
-			'#required' => TRUE,
-			'#states' => array(
-				
-				'visible' => array(
-					 ':input[name="settings"]' => array('value' => '0'),
-				),
-			)
-		];
-	
-	$form['lastname'] = [
-			'#type' => 'textfield',
-			'#title' => t('Lastname'),
-			'#default_value' => "Public",
-			'#size' => 30,
-			'#maxlength' => 30,
-			'#required' => TRUE,
-			'#states' => array(
-				
-				'visible' => array(
-					 ':input[name="settings"]' => array('value' => '0'),
-				),
-			)
-		];
-	
-	$form['email'] = [
-			'#type' => 'textfield',
-			'#title' => t('Email'),
-			'#default_value' => "john@public.com",
-			'#size' => 60,
-			'#maxlength' => 60,
-			'#required' => TRUE,
-			'#states' => array(
-			
-				'visible' => array(
-					 ':input[name="settings"]' => array('value' => '0'),
-				),
-			)
-		];
-	
-	$form['password'] = [
-			'#type' => 'textfield',
-				'#title' => t('password'),
-			'#default_value' => "********",
-			'#size' => 30,
-			'#maxlength' => 30,
-			'#required' => TRUE,
-			'#states' => array(
 
-				'visible' => array(
-					 ':input[name="settings"]' => array('value' => '0'),
-				),
-			)
-		];
-	
-	$form['website'] = [
+
+		$form['livechat_login'] = [
 			'#type' => 'textfield',
-				'#title' => t('Website'),
-			'#default_value' => "Narnia",
+			'#title' => t('LiveChat login:'),
+			'#default_value' => $config->get('livechat_login'),
 			'#size' => 30,
 			'#maxlength' => 30,
 			'#required' => TRUE,
 			'#states' => array(
-
 				'visible' => array(
-					 ':input[name="settings"]' => array('value' => '0'),
+					':input[name="settings"]' => array('value' => '1'),
 				),
 			)
 		];
 
-		$form['settings'] = array(
-			'#type' => 'radios',
-			'#title' => $this->t('Do you have LiveChat account?'),
-			'#default_value' => 1,
-			'#options' => array(0 => $this->t('Nah'), 1 => $this->t('Yes I Do')),
-		);
+		$form['link_container'] = [
+			'#type' => 'container',
+			'#states' => array(
+				'visible' => array(
+					':input[name="settings"]' => array('value' => '0'),
+				),
+			)
+		];
 		
-	return parent::buildForm($form, $form_state);
-  }
-  
-  public function submitForm(array &$form, FormStateInterface $form_state) {
+//		$form['buttons'] = array(
+//			'#type' => 'submit',
+//			'#value' => t('Your desired text here'),
+//		);
+//		$form['buttons'] = array(
+//			'#type' => 'save',
+//			'#value' => t('Your desired text here2'),
+//		);
+
+		$form['link_container']['signup_link'] = [
+			'#type' => 'link',
+			'#markup' => '<a href="https://my.livechatinc.com/signup?utm_source=drupal8&utm_medium=integration&utm_campaign=drupal8integration" target="_blank">Click here to create LiveChat 30 day trial</a>'
+		];
+		
+		if($form['licence_number']['#value']!==''){
+			$form['livechat_login']['#attributes'] = array('disabled' => true);
+		}
+		
+		
+
+		return parent::buildForm($form, $form_state);
+	}
+	
+//	function livechat_form_alter(&$form, &$form_state, $form_id) {
+//		if ($form_id == 'livechat-admin-settings-form') { 
+//		  $form['actions']['submit']['#value'] = t('Sign Up');
+//		}
+//	}
+
+	public function secondary_submit_function(array &$form, FormStateInterface $form_state) {
     
+		$form['livechat_login']['#value'] = "itworked";
+
+		parent::submitForm($form, $form_state);
+	}
+	
+	public function submitForm(array &$form, FormStateInterface $form_state) {
+    		
 	$values = $form_state->getValues();
 	
     $this->config('livechat.settings')
@@ -143,7 +111,7 @@ class SettingsForm extends ConfigFormBase {
       ->save();
 
     parent::submitForm($form, $form_state);
-  }
+	}
   
   public function validateForm(array &$form, FormStateInterface $form_state)
 	{	
@@ -227,6 +195,7 @@ class SettingsForm extends ConfigFormBase {
 					
 				} else {
 					$form_state->setValue('licence_number', json_decode($stream)->number);
+					//$form['livechat_login']['#attributes'] = array('disabled' => true);
 				}
 				
 				
@@ -245,5 +214,5 @@ class SettingsForm extends ConfigFormBase {
 		    $form_state->setErrorByName("livechat_login","this email is invalid");
 		}
   }
-
+  
 }

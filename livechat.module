@@ -8,12 +8,20 @@ function livechat_page_attachments(array &$page) {
  
   $config = \Drupal::config('livechat.settings');
   
+  $path = \Drupal::service('path.current')->getPath();
   
   if (empty($config->get('licence_number'))) {
     return;
   }
   
-  if (!_livechat_active()) {
+  if (!_livechat_active($path)) {
+	  
+	if(strpos($path,"livechat")){
+//	  $page['#attached']['library']['livechat'] = drupal_get_path('module', 'livechat') . '/js/livechat_admin.js';
+	  
+	} 
+	
+	$page_match = false; 
     return;
   }
  
@@ -24,19 +32,28 @@ function livechat_page_attachments(array &$page) {
   $page['#attached']['drupalSettings']['livechat'] = $js_settings;
 
   $page['#attached']['library'][] = 'livechat/livechat';
-
+  
 }
 
-function _livechat_active() {
+function _livechat_active($path) {
  
   $page_match = true;
   
-  $path = \Drupal::service('path.current')->getPath();
-
-	if(strpos($path,"admin")){
+  if(strpos($path,"admin")){
 	  $page_match = false; 
-	}
+  }
 
   return $page_match;
 }
+
+ 
+ function livechat_form_alter(&$form, &$form_state, $form_id) {
+	print_r($form);
+	exit;
+ }
+ 
+ function hook_form_alter(&$form, &$form_state, $form_id) {
+	print_r($form);
+	exit;
+ }
 
