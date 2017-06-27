@@ -29,6 +29,11 @@ class SettingsForm extends ConfigFormBase
 			'#title' => $this->t('Do you have LiveChat account?'),
 			'#default_value' => 1,
 			'#options' => array(0 => $this->t('Nah'), 1 => $this->t('Yes I Do')),
+			'#states' => array(
+				'visible' => array(
+					':input[name="livechat_login"]' => array('empty' => true),
+				),
+			)
 		);
 
 		$form['licence_number'] = [
@@ -129,6 +134,8 @@ class SettingsForm extends ConfigFormBase
 				} else
 				{
 					$form_state->setValue('licence_number', json_decode($stream)->number);
+					
+					drupal_set_message("Now livechat is added to all pages except those with 'admin' in url");
 				}
 			} catch (RequestException $e)
 			{
