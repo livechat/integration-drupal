@@ -14,16 +14,8 @@ function livechat_page_attachments(array &$page) {
     return;
   }
   
-  if (!_livechat_active($path)) {
-	  
-	if(strpos($path,"livechat")){
-//	  $page['#attached']['library']['livechat'] = drupal_get_path('module', 'livechat') . '/js/livechat_admin.js';
-	  
-	} 
-	
-	$page_match = false; 
-    return;
-  }
+  if (_livechat_active($path)) return;
+  
  
   $js_settings = [
     'licence_number' => $config->get('licence_number'),
@@ -37,23 +29,28 @@ function livechat_page_attachments(array &$page) {
 
 function _livechat_active($path) {
  
-  $page_match = true;
+  $page_match = false;
   
   if(strpos($path,"admin")){
-	  $page_match = false; 
+	  $page_match = true ; 
   }
 
   return $page_match;
 }
 
- 
- function livechat_form_alter(&$form, &$form_state, $form_id) {
-	print_r($form);
-	exit;
- }
- 
- function hook_form_alter(&$form, &$form_state, $form_id) {
-	print_r($form);
-	exit;
- }
+ function livechat_form_livechat_admin_settings_form_alter(&$form, &$form_state, $form_id) {
+	 
+
+	$form['actions']['submit']['#value'] = "Save LiveChat licence";
+	$form['actions']['submit']['#states'] = array(
+				'visible' => array(
+					':input[name="settings"]' => array('value' => '1'),
+				),
+			);
+	
+	if($form['livechat_login']['#attributes']['disabled']) {
+		$form['actions']['submit']['#value'] = "Reset LiveChat Settings";
+	}
+
+}
 
