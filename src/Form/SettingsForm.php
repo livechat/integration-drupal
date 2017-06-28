@@ -31,7 +31,7 @@ class SettingsForm extends ConfigFormBase
 			'#options' => array(0 => $this->t('Nah'), 1 => $this->t('Yes I Do')),
 			'#states' => array(
 				'visible' => array(
-					':input[name="livechat_login"]' => array('empty' => true),
+					':input[name="licence_number"]' => array('empty' => true),
 				),
 			)
 		);
@@ -76,7 +76,7 @@ class SettingsForm extends ConfigFormBase
 			'#type' => 'container',
 			'#states' => array(
 				'visible' => array(
-					':input[name="livechat_login"]' => array('empty' => false),
+					':input[name="licence_number"]' => array('empty' => false),
 				),
 			)
 		];
