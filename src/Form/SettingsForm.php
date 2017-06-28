@@ -71,6 +71,21 @@ class SettingsForm extends ConfigFormBase
 			'#type' => 'link',
 			'#markup' => '<a href="https://my.livechatinc.com/signup?utm_source=drupal8&utm_medium=integration&utm_campaign=drupal8integration" target="_blank">Click here to create LiveChat 30 day trial</a>'
 		];
+		
+		$form['webapp_link_container'] = [
+			'#type' => 'container',
+			'#states' => array(
+				'visible' => array(
+					':input[name="livechat_login"]' => array('empty' => false),
+				),
+			)
+		];
+				
+		$form['webapp_link_container']['webapplink'] = [
+			'#type' => 'link',
+			'#markup' => '<span>Sign in to LiveChat and start chatting with your customers!</span><a href="https://my.livechatinc.com?utm_source=drupal8&utm_medium=integration&utm_campaign=drupal8integration" target="_blank" class="button button--primary js-form-submit form-submit czerwony">Go to WebApp</a>or <a target="_blank" href="http://www.livechatinc.com/product/">download desktop app</a>'
+			
+		];
 
 		if (!empty($form['licence_number']['#value']))
 		{
