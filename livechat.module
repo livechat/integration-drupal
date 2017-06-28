@@ -4,6 +4,7 @@ use Drupal\Component\Utility\Unicode;
 use Drupal\Core\Path\PathMatcher;
 use Drupal\Core\Url;
 
+//adding livechat code when conditions are met
 function livechat_page_attachments(array &$page) {
  
   $config = \Drupal::config('livechat.settings');
@@ -27,6 +28,7 @@ function livechat_page_attachments(array &$page) {
   
 }
 
+//checking if url contains "admin" 
 function _livechat_active($path) {
  
   $page_match = false;
@@ -38,6 +40,8 @@ function _livechat_active($path) {
   return $page_match;
 }
 
+ //this hook takes care of chaning default settings for submit button and adds 
+ //custom css to the form when livechat_loging input field is disabled
  function livechat_form_livechat_admin_settings_form_alter(&$form, &$form_state, $form_id) {
 	 
 	$form['actions']['submit']['#value'] = "Save LiveChat licence";

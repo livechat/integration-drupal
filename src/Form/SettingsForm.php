@@ -28,7 +28,7 @@ class SettingsForm extends ConfigFormBase
 			'#type' => 'radios',
 			'#title' => $this->t('Do you have LiveChat account?'),
 			'#default_value' => 1,
-			'#options' => array(0 => $this->t('Nah'), 1 => $this->t('Yes I Do')),
+			'#options' => array(0 => $this->t('No'), 1 => $this->t('Yes I Do')),
 			'#states' => array(
 				'visible' => array(
 					':input[name="licence_number"]' => array('empty' => true),
@@ -161,7 +161,7 @@ class SettingsForm extends ConfigFormBase
 
 			$form['livechat_login']['#value'] = "example@example.com";
 
-			$form_state->setErrorByName("livechat_login", "ten email jest inwalidą");
+			$form_state->setErrorByName("livechat_login", "this email is invalid");
 		}
 	}
 
