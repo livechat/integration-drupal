@@ -40,7 +40,6 @@ function _livechat_active($path) {
 
  function livechat_form_livechat_admin_settings_form_alter(&$form, &$form_state, $form_id) {
 	 
-
 	$form['actions']['submit']['#value'] = "Save LiveChat licence";
 	$form['actions']['submit']['#states'] = array(
 				'visible' => array(
@@ -50,7 +49,7 @@ function _livechat_active($path) {
 	
 	if($form['livechat_login']['#attributes']['disabled']) {
 		$form['actions']['submit']['#value'] = "Reset LiveChat Settings";
+		$form['#attached']['library'] = 'livechat/livechat';
 	}
 
 }
-
