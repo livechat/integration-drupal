@@ -45,6 +45,7 @@ function _livechat_active($path) {
  function livechat_form_livechat_admin_settings_form_alter(&$form, &$form_state, $form_id) {
 	 
 	$form['actions']['submit']['#value'] = "Save configuration";
+	
 	$form['actions']['submit']['#states'] = array(
 				'visible' => array(
 					':input[name="settings"]' => array('value' => '1'),
@@ -54,6 +55,11 @@ function _livechat_active($path) {
 	if($form['livechat_login']['#attributes']['disabled']) {
 		$form['actions']['submit']['#value'] = "Reset LiveChat Settings";
 		$form['#attached']['library'] = 'livechat/livechat';
+	}else{
+		$form['actions']['submit']['#attributes'] = array(
+			'class' => array('container-inline'),
+			'style' => array('margin-top: 10px;')
+		);
 	}
 
 }
