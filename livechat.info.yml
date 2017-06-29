@@ -1,6 +1,6 @@
 name: Livechat
 type: module
-description: Adds Livechat javascript tracking code to all your site's pages.
+description: LiveChat – Adds LiveChat to your website, allowing you to create a Customer Support for your customers.
 package: Utility
 configure: livechat.settings
 version: '8.x'

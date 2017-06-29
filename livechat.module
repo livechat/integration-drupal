@@ -44,7 +44,7 @@ function _livechat_active($path) {
  //custom css to the form when livechat_loging input field is disabled
  function livechat_form_livechat_admin_settings_form_alter(&$form, &$form_state, $form_id) {
 	 
-	$form['actions']['submit']['#value'] = "Save LiveChat licence";
+	$form['actions']['submit']['#value'] = "Save configuration";
 	$form['actions']['submit']['#states'] = array(
 				'visible' => array(
 					':input[name="settings"]' => array('value' => '1'),

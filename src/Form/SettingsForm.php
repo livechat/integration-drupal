@@ -26,7 +26,7 @@ class SettingsForm extends ConfigFormBase
 
 		$form['settings'] = array(
 			'#type' => 'radios',
-			'#title' => $this->t('Do you have LiveChat account?'),
+			'#title' => $this->t('Do you have a LiveChat account?'),
 			'#default_value' => 1,
 			'#options' => array(0 => $this->t('No'), 1 => $this->t('Yes I Do')),
 			'#states' => array(
@@ -46,7 +46,7 @@ class SettingsForm extends ConfigFormBase
 
 		$form['livechat_login'] = [
 			'#type' => 'textfield',
-			'#title' => t('LiveChat login:'),
+			'#title' => t('Your LiveChat login:'),
 			'#default_value' => $config->get('livechat_login'),
 			'#size' => 30,
 			'#maxlength' => 50,
@@ -150,7 +150,8 @@ class SettingsForm extends ConfigFormBase
 				{
 					$form_state->setValue('licence_number', json_decode($stream)->number);
 					
-					drupal_set_message("Now livechat is added to all pages except those with 'admin' in url");
+					drupal_set_message("Now LiveChat is added to all pages available for your customers.
+						LiveChat plugin configuration was successful.");
 				}
 			} catch (RequestException $e)
 			{
@@ -159,9 +160,9 @@ class SettingsForm extends ConfigFormBase
 		} else
 		{
 
-			$form['livechat_login']['#value'] = "example@example.com";
+			$form['livechat_login']['#value'] = "Wrong LiveChat email";
 
-			$form_state->setErrorByName("livechat_login", "this email is invalid");
+			$form_state->setErrorByName("livechat_login", "The email address you provided does not exist in our database. Please double check your LiveChat email address.");
 		}
 	}
 
