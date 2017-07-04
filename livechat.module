@@ -55,6 +55,12 @@ function _livechat_active($path) {
 	if($form['livechat_login']['#attributes']['disabled']) {
 		$form['actions']['submit']['#value'] = "Reset LiveChat Settings";
 		$form['#attached']['library'] = 'livechat/livechat';
+		$form['settings']['#attributes'] = array(
+			'class' => array('container-inline'),
+			'style' => array('display: none;')
+		);
+		
+		
 	}else{
 		$form['actions']['submit']['#attributes'] = array(
 			'class' => array('container-inline'),
