@@ -7,3 +7,4 @@ livechat:
       css/livechat.theme.css: {}
   dependencies:
     - core/drupalSettings
+    - core/jquery

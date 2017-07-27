@@ -57,6 +57,58 @@ class SettingsForm extends ConfigFormBase
 				),
 			)
 		];
+		
+				
+		$form['label'] = [
+			'#type' => 'item',
+			'#name' => 'after_login_info',
+			'#title' => 'You are now using '.$config->get('livechat_login'). ' account.' ,
+			'#states' => array(
+				'visible' => array(
+					':input[name="licence_number"]' => array('empty' => false),
+				),
+			)
+		];
+		
+		$form['advanced'] = array(
+			'#type' => 'details',
+			'#title' => 'Advanced settings',
+			'#states' => array(
+				'visible' => array(
+					':input[name="licence_number"]' => array('empty' => false),
+				),
+			)
+		);
+		
+		$form['advanced']['sounds'] = array(
+			'#type' => 'select',
+			'#title' => $this->t('Disable sounds for visitor'),
+			'#options' => [
+				'0' => $this->t('Off'),
+				'1' => $this->t('On')
+			],
+			'#default_value' => $config->get('livechat_sounds'),
+		);
+		
+		$form['advanced']['mobile'] = array(
+			'#type' => 'select',
+			'#title' => $this->t('Disable chat on mobile'),
+			'#options' => [
+				'0' => $this->t('Off'),
+				'1' => $this->t('On')
+			],
+			'#default_value' => $config->get('livechat_mobile'),
+		);
+		
+		$form['advanced']['save_advanced'] = array(
+			'#type' => 'submit',
+			'#name' => 'save_advanced',
+			'#value' => 'Save advanced options',
+			'class' => array('container-inline, advanced_button'),
+			'style' => array('border-radius: 0.143rem;')
+		);
+
+		
 
 		$form['link_container'] = [
 			'#type' => 'container',
@@ -83,7 +135,7 @@ class SettingsForm extends ConfigFormBase
 				
 		$form['webapp_link_container']['webapplink'] = [
 			'#type' => 'link',
-			'#markup' => '<span>Sign in to LiveChat and start chatting with your customers!</span><a href="https://my.livechatinc.com?utm_source=drupal8&utm_medium=integration&utm_campaign=drupal8integration" target="_blank" class="button button--primary js-form-submit form-submit czerwony">Go to WebApp</a>or <a target="_blank" href="http://www.livechatinc.com/product/">download desktop app</a>'
+			'#markup' => '<span>Sign in to LiveChat and start chatting with your customers!</span><a href="https://my.livechatinc.com?utm_source=drupal8&utm_medium=integration&utm_campaign=drupal8integration" target="_blank"> Go to WebApplication </a>or<a target="_blank" href="http://www.livechatinc.com/product/">download desktop app</a>'
 			
 		];
 
@@ -91,19 +143,55 @@ class SettingsForm extends ConfigFormBase
 		{
 			$form['livechat_login']['#attributes'] = array('disabled' => true);
 		}
+		
+		$form['reset'] = array(
+			'#type' => 'submit',
+			'#name' => 'reset',
+			'#value' => 'Reset LiveChat Settings',
+			'#attributes' => array(
+			'class' => array('container-inline, edit-submit'),
+			'style' => array('display: none;')
+			)
+		);
 
 		return parent::buildForm($form, $form_state);
 	}
 
 	public function submitForm(array &$form, FormStateInterface $form_state)
 	{
-		if (!$form['livechat_login']['#attributes']['disabled'])
+		if($form_state->getTriggeringElement()['#name']==="save_advanced")
 		{
 			$values = $form_state->getValues();
 
 			$this->config('livechat.settings')
 					->set('licence_number', $values['licence_number'])
 					->set('livechat_login', $values['livechat_login'])
+					->set('livechat_sounds', $values['sounds'])
+					->set('livechat_mobile', $values['mobile'])
+					->save();
+		}
+		
+		if ($form_state->getTriggeringElement()['#name']==="op")
+		{
+			$values = $form_state->getValues();
+			
+			$this->config('livechat.settings')
+					->set('licence_number', $values['licence_number'])
+					->set('livechat_login', $values['livechat_login'])
+					->set('livechat_sounds', $values['sounds'])
+					->set('livechat_mobile', $values['mobile'])
+					->save();
+		}
+		
+		if ($form_state->getTriggeringElement()['#name']==="reset")
+		{
+			$values = $form_state->getValues();
+			
+			$this->config('livechat.settings')
+					->set('licence_number', '')
+					->set('livechat_login', '')
+					->set('livechat_sounds', '0')
+					->set('livechat_mobile', '0')
 					->save();
 		}
 		parent::submitForm($form, $form_state);

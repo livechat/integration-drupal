@@ -15,11 +15,13 @@ function livechat_page_attachments(array &$page) {
     return;
   }
   
-  if (_livechat_active($path)) return;
+//  if (_livechat_active($path)) return;
   
  
   $js_settings = [
     'licence_number' => $config->get('licence_number'),
+	'livechat_mobile' => $config->get('livechat_mobile'),
+	'licence_sounds' => $config->get('licence_sounds'),
   ];
 
   $page['#attached']['drupalSettings']['livechat'] = $js_settings;
@@ -53,11 +55,19 @@ function _livechat_active($path) {
 			);
 	
 	if($form['livechat_login']['#attributes']['disabled']) {
-		$form['actions']['submit']['#value'] = "Reset LiveChat Settings";
+		
+		unset($form['actions']['submit']);
+		
 		$form['#attached']['library'] = 'livechat/livechat';
+		
 		$form['settings']['#attributes'] = array(
 			'class' => array('container-inline'),
 			'style' => array('display: none;')
+		);
+		
+		$form['reset']['#attributes'] = array(
+			'class' => array('container-inline, edit-submit'),
+			'style' => array('display: block;')
 		);
 		
 		
