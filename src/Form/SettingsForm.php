@@ -162,7 +162,7 @@ class SettingsForm extends ConfigFormBase
 		if($form_state->getTriggeringElement()['#name']==="save_advanced")
 		{
 			$values = $form_state->getValues();
-
+			
 			$this->config('livechat.settings')
 					->set('licence_number', $values['licence_number'])
 					->set('livechat_login', $values['livechat_login'])
