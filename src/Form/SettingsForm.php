@@ -121,7 +121,7 @@ class SettingsForm extends ConfigFormBase
 
 		$form['link_container']['signup_link'] = [
 			'#type' => 'link',
-			'#markup' => '<a href="https://my.livechatinc.com/signup?utm_source=drupal8&utm_medium=integration&utm_campaign=drupal8integration" target="_blank">Click here to create LiveChat 30 day trial</a>'
+			'#markup' => '<a href="https://my.livechatinc.com/signup?utm_source=drupal8&utm_medium=integration&utm_campaign=drupal8integration" target="_blank">Click here to create LiveChat 30 day trial!</a>'
 		];
 		
 		$form['webapp_link_container'] = [
@@ -135,7 +135,7 @@ class SettingsForm extends ConfigFormBase
 				
 		$form['webapp_link_container']['webapplink'] = [
 			'#type' => 'link',
-			'#markup' => '<span>Sign in to LiveChat and start chatting with your customers!</span><a href="https://my.livechatinc.com?utm_source=drupal8&utm_medium=integration&utm_campaign=drupal8integration" target="_blank"> Go to WebApplication </a>or<a target="_blank" href="http://www.livechatinc.com/product/">download desktop app</a>'
+			'#markup' => '<span>Sign in to LiveChat and start chatting with your customers! </span><a href="https://my.livechatinc.com?utm_source=drupal8&utm_medium=integration&utm_campaign=drupal8integration" target="_blank">Go to WebApplication </a>or<a target="_blank" href="http://www.livechatinc.com/product/">download desktop app</a>.'
 			
 		];
 
@@ -160,7 +160,7 @@ class SettingsForm extends ConfigFormBase
 	public function submitForm(array &$form, FormStateInterface $form_state)
 	{
 		if($form_state->getTriggeringElement()['#name']==="save_advanced")
-		{
+		{			
 			$values = $form_state->getValues();
 			
 			$this->config('livechat.settings')
