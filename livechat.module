@@ -14,12 +14,18 @@ function livechat_page_attachments(array &$page) {
   if (empty($config->get('licence_number'))) {
     return;
   }
-  
-  if (_livechat_active($path)) return;
-  
- 
+
+  $is_admin_page = true;
+  if(!_livechat_active($path))
+  {
+	$is_admin_page = false;
+  }
+   
   $js_settings = [
-    'licence_number' => $config->get('licence_number'),
+    'licence_number'  => $config->get('licence_number'),
+	'livechat_mobile' => $config->get('livechat_mobile'),
+	'livechat_sounds' => $config->get('livechat_sounds'),
+	'is_admin_page'	  => $is_admin_page
   ];
 
   $page['#attached']['drupalSettings']['livechat'] = $js_settings;
@@ -53,8 +59,22 @@ function _livechat_active($path) {
 			);
 	
 	if($form['livechat_login']['#attributes']['disabled']) {
-		$form['actions']['submit']['#value'] = "Reset LiveChat Settings";
+		
+		unset($form['actions']['submit']);
+		
 		$form['#attached']['library'] = 'livechat/livechat';
+		
+		$form['settings']['#attributes'] = array(
+			'class' => array('container-inline'),
+			'style' => array('display: none;')
+		);
+		
+		$form['reset']['#attributes'] = array(
+			'class' => array('container-inline, edit-submit'),
+			'style' => array('display: block;')
+		);
+		
+		
 	}else{
 		$form['actions']['submit']['#attributes'] = array(
 			'class' => array('container-inline'),

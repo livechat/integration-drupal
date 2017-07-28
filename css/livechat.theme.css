@@ -1,4 +1,4 @@
-.livechat-admin-settings-form #edit-submit
+.livechat-admin-settings-form .edit-submit
 {
   background-image: linear-gradient(to bottom, white, white);
   border: none;
@@ -11,7 +11,7 @@
   padding-left: 0px;
 }
 
-.livechat-admin-settings-form #edit-submit:hover
+.livechat-admin-settings-form .edit-submit:hover
 {
   background-image: linear-gradient(to bottom, white, white);
   border: none;
@@ -23,7 +23,7 @@
 /*  margin-left: 120px;*/
 }
 
-.livechat-admin-settings-form #edit-submit:focus
+.livechat-admin-settings-form .edit-submit:focus
 {
   background-image: linear-gradient(to bottom, white, white);
   border: none;
@@ -38,4 +38,17 @@
 
 #edit-webapp-link-container > a:nth-child(3) {
 	margin-left: 7px;
+}
+
+
+
+#edit-save-advanced {
+	border-radius: 0.143rem;
+	margin-left: 0px;
+	margin-top: 8px;
+	margin-bottom: 13px;
+}
+
+.js-form-item-sounds {
+	margin-top: 0px!important;
 }
