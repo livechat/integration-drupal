@@ -83,3 +83,12 @@ function _livechat_active($path) {
 	}
 
 }
+
+
+function livechat_theme($existing, $type, $theme, $path) {
+  return [
+    'livechat_settings' => [
+      'variables' => ['overridden' => FALSE],
+    ],
+  ];
+}
