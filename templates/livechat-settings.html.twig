@@ -1,1 +1,78 @@
-test of a form
+<div id="login_panel" style="display:flex; align-items: center;">
+	<div style="display: flex; flex-direction: column; align-items: center; margin-bottom: 40px;">
+		<div style="display: flex; flex-direction: row; align-items: center;">
+			<div class="livechat_logo2"></div>
+		</div>
+		<div id="login_form">
+			<div class="progress-button hidden">
+				Saving...
+			</div>
+			<div>				
+				<iframe id="login-with-livechat" src="https://addons.livechatinc.com/sign-in-with-livechat"> </iframe>
+			</div>
+		</div>
+		<div class="or-delimiter">or</div>
+		<div id="livechat_link" style="font-size: 15px; margin-top:4px;">
+			<a href="https://my.livechatinc.com/signup?utm_source=drupal.com&utm_medium=integration&utm_campaign=drupal_integration" target="_blank">create an account</a>
+		</div>
+	</div>
+	<div style="text-align: center;">
+		<div class="livechat_screenshot"></div>
+		<p id="costam" style="font-size:16px;">Check out our apps for <a href="https://www.livechatinc.com/applications/?utm_source=drupal.com&amp;utm_medium=integration&amp;utm_campaign=drupal_integration" target="_blank">desktop or mobile!</a></p>
+	</div>
+</div>
+<div id="admin_panel" style="display:none;">
+	<div style="display: flex; justify-content: space-around; align-items: center;">
+		<div style="display: flex; justify-content: space-around; align-items: center; flex-direction: column;">
+			<table cellspacing="0" class="form-list">
+				<tbody>
+					<tr>
+						<td colspan="2">
+							<div class="">Your LiveChat is now ready!</div>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<div class="" style="margin-bottom: -4px;">You are now rocking chat window from your <span id="livechat_login"></span> account.</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+
+						</td>
+					</tr>
+					<tr>
+						<td class="label tooltip"><label>Hide chat window on mobile <span class="question_mark"></span> :</label><span class="tooltiptext2">Hide chat window for visitors browsing your store from mobile.</span></td>
+						<td class="value">
+							<select id="livechat_mobile" name="livechat_mobile" class="select">
+								<option value="Yes">Yes</option>
+								<option value="No" selected>No</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td>
+
+						</td>
+					</tr>
+					<tr>
+						<td class="label tooltip"><label>Disable chat window sounds <span class="question_mark"></span> :</label><span class="tooltiptext">Disable chat window sounds played for your customers (your agents will still hear chat notifications!).</span></td>
+						<td class="value">
+							<select id="livechat_sounds" name="livechat_sounds" class="select">
+								<option value="Yes">Yes</option>
+								<option value="No" selected>No</option>
+							</select>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>Need help? Check out our <a href="https://www.livechatinc.com/kb/drupal-add-livechat-website/?utm_source=drupal.com&amp;utm_medium=integration&amp;utm_campaign=drupal_integration" target="_blank">LiveChat for Drupal 8 integration tutorial</a>.</p>
+			<p class="reset-settings">Something went wrong? <a class="reset-settings" href="#" id="reset_settings">Click here</a> to reset settings!</p>
+		</div>
+		<div style="text-align: center;">
+			<div class="livechat_screenshot"></div>
+
+			<p>Use our <a href="https://my.livechatinc.com?utm_source=drupal.com&amp;utm_medium=integration&amp;utm_campaign=drupal_integration" target="_blank">web application</a> or download <a href="https://www.livechatinc.com/applications/?utm_source=drupal.com&amp;utm_medium=integration&amp;utm_campaign=drupal_integration" target="_blank">the app</a> for desktop or mobile!</p>
+		</div>
+	</div>
+</div>

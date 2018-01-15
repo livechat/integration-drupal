@@ -7,7 +7,7 @@ if(!drupalSettings.livechat.is_admin_page)
   return check;
   };
    
-if( !(drupalSettings.livechat.livechat_mobile==="1" && mobilecheck())) {
+if( !(drupalSettings.livechat.livechat_mobile==="Yes" && mobilecheck())) {
 
 			window.__lc = window.__lc || {};
 			window.__lc.license = drupalSettings.livechat.licence_number;
@@ -20,7 +20,7 @@ if( !(drupalSettings.livechat.livechat_mobile==="1" && mobilecheck())) {
 				s.parentNode.insertBefore(lc, s);
 			})();
 
-		  if(drupalSettings.livechat.livechat_sounds === "1") {
+		  if(drupalSettings.livechat.livechat_sounds === "Yes") {
 
 			var LC_API = LC_API || {};
 			LC_API.on_before_load = function() {
@@ -29,38 +29,4 @@ if( !(drupalSettings.livechat.livechat_mobile==="1" && mobilecheck())) {
 		}
 
 	}
-
-} else {
-	
-(function($) {
-	Drupal.behaviors.livechat = {  
-	 attach: function (context, settings) {
-
-		 $('details#edit-advanced',context).hide();
-
-		 $('.form-item-after-login-info', context).hide();
-
-		 if($('#edit-livechat-login', context).is((':disabled'))){
-
-
-			 $('#edit-livechat-login', context).hide();
-			 $('#livechat-admin-settings-form > div.js-form-item.form-item.js-form-type-textfield.form-type-textfield.js-form-item-livechat-login.form-item-livechat-login.form-disabled > label', context).hide();
-			 $('#livechat-admin-settings-form > div.js-form-item.form-item.js-form-type-textfield.form-type-textfield.js-form-item-livechat-login-element.form-item-livechat-login-element.form-disabled > label', context).hide();
-
-			 $('div.js-form-item-livechat-login-element', context).hide();
-			 $('.form-item-after-login-info', context).show();
-
-			 $('details#edit-advanced',context).show();
-		 }
-
-	 if(!$('#edit-livechat-login', context).is((':disabled'))){
-
-		 $('edit-advanced',context).hide();
-	 }
-
-
-	 }
-   }
- })(jQuery);
-
 }

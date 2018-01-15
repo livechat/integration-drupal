@@ -52,3 +52,24 @@
 .js-form-item-sounds {
 	margin-top: 0px!important;
 }
+
+iframe#login-with-livechat,
+#login_form {
+	margin-left: 5px;
+	width: 214px;
+	height: 43px;
+	border: none;
+}
+
+.livechat_logo2 {
+	content: url(../img/livechat-drupal-is-here@2x.png);
+	width: 600px;
+}
+
+.livechat_screenshot {
+	content: url(../img/livechat-app.png);
+	height: auto;
+	width: 100%;
+	max-width: 800px;
+	margin-top: 30px;
+}
