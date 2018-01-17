@@ -5,7 +5,7 @@ use Drupal\Core\Path\PathMatcher;
 use Drupal\Core\Url;
 
 //adding livechat code when conditions are met
-function livechat_page_attachments(array &$page) {
+function livechat_page_attachments_alter(array &$page) {
  
   $config = \Drupal::config('livechat.settings');
   
@@ -34,7 +34,6 @@ function livechat_page_attachments(array &$page) {
   
 }
 
-//checking if url contains "admin" 
 function _livechat_active($path) {
  
   $page_match = false;
@@ -46,40 +45,10 @@ function _livechat_active($path) {
   return $page_match;
 }
 
- //this hook takes care of chaning default settings for submit button and adds 
- //custom css to the form when livechat_loging input field is disabled
- function livechat_form_livechat_admin_settings_form_alter(&$form, &$form_state, $form_id) {
-	 
-	$form['actions']['submit']['#value'] = "Save configuration";
-	
-	$form['actions']['submit']['#states'] = array(
-				'visible' => array(
-					':input[name="settings"]' => array('value' => '1'),
-				),
-			);
-	
-	if($form['livechat_login']['#attributes']['disabled']) {
-		
-		unset($form['actions']['submit']);
-		
-		$form['#attached']['library'] = 'livechat/livechat';
-		
-		$form['settings']['#attributes'] = array(
-			'class' => array('container-inline'),
-			'style' => array('display: none;')
-		);
-		
-		$form['reset']['#attributes'] = array(
-			'class' => array('container-inline, edit-submit'),
-			'style' => array('display: block;')
-		);
-		
-		
-	}else{
-		$form['actions']['submit']['#attributes'] = array(
-			'class' => array('container-inline'),
-			'style' => array('margin-top: 10px;')
-		);
-	}
-
+function livechat_theme($existing, $type, $theme, $path) {
+  return [
+    'livechat_settings' => [
+      'variables' => []
+    ],
+  ];
 }

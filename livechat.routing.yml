@@ -1,7 +1,25 @@
 livechat.settings:
   path: 'admin/config/services/livechat'
   defaults:
-    _form: '\Drupal\livechat\Form\SettingsForm'
-    _title: 'LiveChat'
+    _controller: '\Drupal\livechat\Controller\LivechatController::AdminForm'
+    _title: 'Livechat Settings'
+  requirements:
+    _permission: 'administer LiveChat'
+livechat.save_license:
+  path: 'admin/config/services/livechat/saveLicense'
+  defaults:
+    _controller: '\Drupal\livechat\Controller\LivechatController::SaveLicense'
+  requirements:
+    _permission: 'administer LiveChat'
+livechat.save_properties:
+  path: 'admin/config/services/livechat/saveProperties'
+  defaults:
+    _controller: '\Drupal\livechat\Controller\LivechatController::SaveProperties'
+  requirements:
+    _permission: 'administer LiveChat'
+livechat.reset_props:
+  path: 'admin/config/services/livechat/reset'
+  defaults:
+    _controller: '\Drupal\livechat\Controller\LivechatController::ResetProps'
   requirements:
     _permission: 'administer LiveChat'
