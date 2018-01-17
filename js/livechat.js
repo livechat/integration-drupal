@@ -23,7 +23,7 @@ if( !(drupalSettings.livechat.livechat_mobile==="Yes" && mobilecheck())) {
 		  if(drupalSettings.livechat.livechat_sounds === "Yes") {
 
 			var LC_API = LC_API || {};
-			LC_API.on_before_load = function() {
+			LC_API.on_after_load = function() {
 				LC_API.disable_sounds();
 			};
 		}
