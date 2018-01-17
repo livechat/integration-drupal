@@ -22,50 +22,39 @@
 	</div>
 </div>
 <div id="admin_panel" style="display:none;">
-	<div style="display: flex; justify-content: space-around; align-items: center;">
-		<div style="display: flex; justify-content: space-around; align-items: center; flex-direction: column;">
-			<table cellspacing="0" class="form-list">
-				<tbody>
-					<tr>
-						<td colspan="2">
-							<div class="">Your LiveChat is now ready!</div>
-						</td>
-					</tr>
-					<tr>
-						<td colspan="2">
-							<div class="" style="margin-bottom: -4px;">You are now rocking chat window from your <span id="livechat_login"></span> account.</div>
-						</td>
-					</tr>
-					<tr>
-						<td>
+	<div class="region region-highlighted notification" style="visibility: hidden;">
+		<div role="contentinfo" aria-label="Status message" class="messages messages--status">
+				  <h2 class="visually-hidden">Status message</h2>
+					The ADVANCED SETTINGS have been saved.
+		</div>
+	</div>
+	<div style="display: flex; justify-content: space-around;">
+		
+		<div style="margin-top: 50px;">
+			
+			<h3>Your LiveChat is now ready!</h3>
 
-						</td>
-					</tr>
-					<tr>
-						<td class="label tooltip"><label>Hide chat window on mobile <span class="question_mark"></span> :</label><span class="tooltiptext2">Hide chat window for visitors browsing your store from mobile.</span></td>
-						<td class="value">
-							<select id="livechat_mobile" name="livechat_mobile" class="select">
-								<option value="Yes">Yes</option>
-								<option value="No" selected>No</option>
-							</select>
-						</td>
-					</tr>
-					<tr>
-						<td>
+			<div style="margin-bottom: -4px;">You are now rocking chat window from your <span id="livechat_login" style="font-weight: bold;"></span> account.</div>
 
-						</td>
-					</tr>
-					<tr>
-						<td class="label tooltip"><label>Disable chat window sounds <span class="question_mark"></span> :</label><span class="tooltiptext">Disable chat window sounds played for your customers (your agents will still hear chat notifications!).</span></td>
-						<td class="value">
-							<select id="livechat_sounds" name="livechat_sounds" class="select">
-								<option value="Yes">Yes</option>
-								<option value="No" selected>No</option>
-							</select>
-						</td>
-					</tr>
-				</tbody>
-			</table>
+			<details style="width: 550px;" open><summary role="button">Advanced settings</summary>
+			<div id="advanced_settings" class="details-wrapper">
+				<div class="details-description"></div>
+				<div class="js-form-item form-item js-form-type-select form-type-select">
+					<label style="display: inline-block; vertical-align: 9%;" for="livechat_mobile">Hide chat window on mobile <span data-tooltip="Hide chat window for visitors browsing your store from mobile." data-tooltip-position="top"><div class="question_mark"></div></span></label>
+					<select id="livechat_mobile" name="livechat_mobile" class="select advanced_options" style="margin-left: 13px;">
+						<option value="Yes">Yes</option>
+						<option value="No" selected>No</option>
+					</select>
+				</div>
+				<div class="js-form-item form-item js-form-type-select form-type-select">
+					<label style="display: inline-block; vertical-align: 9%;" for="livechat_sounds">Disable chat window sounds <span data-tooltip="Disable chat window sounds played for your customers (your agents will still hear chat notifications!)." data-tooltip-position="top"><div class="question_mark"></div></span></label>
+					<select id="livechat_sounds" name="livechat_sounds" class="select advanced_options" style="margin-left: 12px;">
+						<option value="Yes">Yes</option>
+						<option value="No" selected>No</option>
+					</select>
+				</div>
+			</div>
+			</details>
 			<p>Need help? Check out our <a href="https://www.livechatinc.com/kb/drupal-add-livechat-website/?utm_source=drupal.com&amp;utm_medium=integration&amp;utm_campaign=drupal_integration" target="_blank">LiveChat for Drupal 8 integration tutorial</a>.</p>
 			<p class="reset-settings">Something went wrong? <a class="reset-settings" href="#" id="reset_settings">Click here</a> to reset settings!</p>
 		</div>
