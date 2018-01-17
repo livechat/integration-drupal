@@ -5,6 +5,17 @@
 	Drupal.behaviors.livechat_admin = {
 		attach: function (context, settings) {
 			
+			var showNotification = function () {
+				$('.notification').css('visibility','visible');
+				setTimeout(function () {
+					$('.notification').addClass("fadeout");
+				},1000);
+				setTimeout(function () {
+					$('.notification').css('visibility','hidden');
+					$('.notification').removeClass("fadeout");
+				},1300);
+			};
+			
 			var logoutLiveChat = function () {
 				sendMessage('logout');
 			};
@@ -29,12 +40,11 @@
 			if (!(props.mobile === '0' || props.mobile === null)) {
 				$('#livechat_mobile').val(props.mobile);
 			}
-			
-			$('#livechat_mobile').on('change', function() {
-				
+						
+			$('.advanced_options').on('change', function() {
 				var mobile = $('#livechat_mobile').val();
 				var sounds = $('#livechat_sounds').val();
-				
+				$('#advanced_settings').addClass('disable_advanced_settings');
 				$.ajax({
 					type: 'POST',
 					dataType: 'json',
@@ -43,21 +53,9 @@
 						mobile: mobile,
 						sounds: sounds
 					}
-				});
-			});
-			
-			$('#livechat_sounds').on('change', function() {
-				var mobile = $('#livechat_mobile').val();
-				var sounds = $('#livechat_sounds').val();
-				
-				$.ajax({
-					type: 'POST',
-					dataType: 'json',
-					url: settings.livechat.livechat_admin.save_properties_url,
-					data: {
-						mobile: mobile,
-						sounds: sounds
-					}
+				}).done(function(){
+					showNotification();
+					$('#advanced_settings').removeClass('disable_advanced_settings');
 				});
 			});
 			
