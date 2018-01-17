@@ -54,8 +54,10 @@ class LivechatController extends ControllerBase
 	{
 		$settings = \Drupal::configFactory()->getEditable('livechat.settings');
 		
-		$settings->set('licence_number', $request->request->get('license'))->save();
-		$settings->set('livechat_login', $request->request->get('email'))->save();
+		$settings->set('licence_number', filter_var($request->request->get('license'), 
+				FILTER_SANITIZE_NUMBER_INT))->save();
+		$settings->set('livechat_login', filter_var($request->request->get('email'), 
+				FILTER_SANITIZE_EMAIL))->save();
 		$settings->set('livechat_sounds', 'No')->save();
 		$settings->set('livechat_mobile', 'No')->save();
 		drupal_flush_all_caches();
@@ -67,8 +69,10 @@ class LivechatController extends ControllerBase
 	{
 		$settings = \Drupal::configFactory()->getEditable('livechat.settings');
 		
-		$settings->set('livechat_sounds', $request->request->get('sounds'))->save();
-		$settings->set('livechat_mobile', $request->request->get('mobile'))->save();
+		$settings->set('livechat_sounds', filter_var($request->request->get('sounds'),
+				FILTER_SANITIZE_STRING))->save();
+		$settings->set('livechat_mobile', filter_var($request->request->get('mobile'),
+				FILTER_SANITIZE_STRING))->save();
 		drupal_flush_all_caches();
 		
 		return new JsonResponse(['save_properties' => 'success']);
