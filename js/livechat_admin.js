@@ -78,11 +78,11 @@
 			};
 
 			function receiveMessage(event) {
-                try {
-                    var livechatMessage = JSON.parse(event.data);
-                } catch (e) {
-                    return false;
-                }
+				try {
+					var livechatMessage = JSON.parse(event.data);
+				} catch (e) {
+					return false;
+				}
 
 				if (livechatMessage.type === 'logged-in' && livechatMessage.eventTrigger === 'click') {
 
