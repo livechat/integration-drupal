@@ -15,18 +15,10 @@ if( !(drupalSettings.livechat.livechat_mobile==="Yes" && mobilecheck())) {
 				var lc = document.createElement('script');
 				lc.type = 'text/javascript';
 				lc.async = true;
-				lc.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'cdn.livechatinc.com/									tracking.js';
+				lc.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'cdn.livechatinc.com/tracking.js';
 				var s = document.getElementsByTagName('script')[0];
 				s.parentNode.insertBefore(lc, s);
 			})();
-
-		  if(drupalSettings.livechat.livechat_sounds === "Yes") {
-
-			var LC_API = LC_API || {};
-			LC_API.on_after_load = function() {
-				LC_API.disable_sounds();
-			};
-		}
 
 	}
 }

@@ -21,7 +21,6 @@ class LivechatController extends ControllerBase
 		
 		$livechat_props['licence_number'] = $settings->get('licence_number');
 		$livechat_props['login'] = $settings->get('livechat_login');
-		$livechat_props['sounds'] = $settings->get('livechat_sounds');
 		$livechat_props['mobile'] = $settings->get('livechat_mobile');
 		
 		$host = \Drupal::request()->getSchemeAndHttpHost();
@@ -58,7 +57,6 @@ class LivechatController extends ControllerBase
 				FILTER_SANITIZE_NUMBER_INT))->save();
 		$settings->set('livechat_login', filter_var($request->request->get('email'), 
 				FILTER_SANITIZE_EMAIL))->save();
-		$settings->set('livechat_sounds', 'No')->save();
 		$settings->set('livechat_mobile', 'No')->save();
 		drupal_flush_all_caches();
 		
@@ -68,9 +66,7 @@ class LivechatController extends ControllerBase
 	public function SaveProperties(Request $request)
 	{
 		$settings = \Drupal::configFactory()->getEditable('livechat.settings');
-		
-		$settings->set('livechat_sounds', filter_var($request->request->get('sounds'),
-				FILTER_SANITIZE_STRING))->save();
+
 		$settings->set('livechat_mobile', filter_var($request->request->get('mobile'),
 				FILTER_SANITIZE_STRING))->save();
 		drupal_flush_all_caches();
@@ -85,7 +81,6 @@ class LivechatController extends ControllerBase
 		
 		$settings->set('licence_number', '0')->save();
 		$settings->set('livechat_login', '0')->save();
-		$settings->set('livechat_sounds', '0')->save();
 		$settings->set('livechat_mobile', '0')->save();
 		drupal_flush_all_caches();
 
