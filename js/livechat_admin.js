@@ -33,25 +33,19 @@
 				$('#livechat_login').text(props.login);
 			}
 
-			if (!(props.sounds === '0' || props.sounds === null)) {
-				$('#livechat_sounds').val(props.sounds);
-			}
-
 			if (!(props.mobile === '0' || props.mobile === null)) {
 				$('#livechat_mobile').val(props.mobile);
 			}
 						
 			$('.advanced_options').on('change', function() {
 				var mobile = $('#livechat_mobile').val();
-				var sounds = $('#livechat_sounds').val();
 				$('#advanced_settings').addClass('disable_advanced_settings');
 				$.ajax({
 					type: 'POST',
 					dataType: 'json',
 					url: settings.livechat.livechat_admin.save_properties_url,
 					data: {
-						mobile: mobile,
-						sounds: sounds
+						mobile: mobile
 					}
 				}).done(function(){
 					showNotification();
@@ -84,7 +78,11 @@
 			};
 
 			function receiveMessage(event) {
-				var livechatMessage = JSON.parse(event.data);
+                try {
+                    var livechatMessage = JSON.parse(event.data);
+                } catch (e) {
+                    return false;
+                }
 
 				if (livechatMessage.type === 'logged-in' && livechatMessage.eventTrigger === 'click') {
 

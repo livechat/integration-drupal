@@ -24,7 +24,6 @@ function livechat_page_attachments_alter(array &$page) {
   $js_settings = [
     'licence_number'  => $config->get('licence_number'),
 	'livechat_mobile' => $config->get('livechat_mobile'),
-	'livechat_sounds' => $config->get('livechat_sounds'),
 	'is_admin_page'	  => $is_admin_page
   ];
 
