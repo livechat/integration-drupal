@@ -45,9 +45,17 @@ function _livechat_active($path) {
 }
 
 function livechat_theme($existing, $type, $theme, $path) {
+  $user = \Drupal::currentUser();
+  $userName = $user->getUsername();
+  $userEmail = $user->getEmail();
+
   return [
     'livechat_settings' => [
-      'variables' => []
+      'variables' => [
+      	'userName' => $userName,
+		'userEmail' => $userEmail,
+		'siteUrl' => $GLOBALS['base_url']
+      ]
     ],
   ];
 }
