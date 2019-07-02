@@ -1,0 +1,1 @@
+Repository migrated to [Drupal Git](https://www.drupal.org/project/live_chat_for_drupal/git-instructions).
