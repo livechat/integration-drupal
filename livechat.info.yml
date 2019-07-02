@@ -1,9 +1,0 @@
-name: LiveChat
-type: module
-description: LiveChat – Adds LiveChat to your website, allowing you to create a Customer Support for your customers.
-package: Utility
-configure: livechat.settings
-version: '8.x'
-core: '8.x'
-project: 'livechat'
-

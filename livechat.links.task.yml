@@ -1,4 +1,0 @@
-livechat.settings:
- title: 'Livechat'
- route_name: livechat.settings
- base_route: livechat.settings
